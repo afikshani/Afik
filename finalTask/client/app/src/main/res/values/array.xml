@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="stocks_list">
+        <item>Tesla</item>
+        <item>Ferrari</item>
+        <item>Ford</item>
+        <item>Apple</item>
+        <item>Microsoft</item>
+        <item>aapl</item>
+    </string-array>
+
+
+</resources>
