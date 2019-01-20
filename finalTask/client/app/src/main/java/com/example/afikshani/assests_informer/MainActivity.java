@@ -1,12 +1,19 @@
 package com.example.afikshani.assests_informer;
 
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -34,24 +41,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
         parent.getItemAtPosition(default_pos);
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try {
-            userSocket = IO.socket("http://localhost:8081");
-            userSocket.connect();
-            userSocket.on("stock info", onStockInfoPush);
-
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
+        // Create socket wrapper and initialize socket.io
+        MySocketWrapper socketWrapper = new MySocketWrapper();
+        userSocket = socketWrapper.getSocket();
+        userSocket.on("stock info", onStockInfoPush);
+        userSocket.connect();
 
         // Setting up the stocks spinner
         stocks_spinner = findViewById(R.id.stocks_spinner);
@@ -60,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         stocks_spinner.setAdapter(stock_adapter);
         stocks_spinner.setOnItemSelectedListener(this);
 
+
+        // Create the submit button to be working with
         submit_btn = findViewById(R.id.submit_btn);
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,26 +77,28 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-
+    // Create an emitter listener for stock information
     private Emitter.Listener onStockInfoPush = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
-            runOnUiThread(new Runnable() {
+
+            MainActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     JSONObject data = (JSONObject) args[0];
-                    String StockName, stockVal;
+                    String stockVal;
                     try {
-                        StockName = data.getString("Meta Data");
-                        //stockVal = data.getString("username");
+                        stockVal = data.getString("stockValue");
                     } catch (JSONException e) {
                         return;
                     }
-                    Toast.makeText(MainActivity.this, StockName, Toast.LENGTH_SHORT).show();
+                    ((TextView) findViewById(R.id.stock_name)).setText(stockVal);
                 }
             });
         }
     };
+
+
 
 }
 

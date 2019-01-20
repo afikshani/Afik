@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "806849435804",
+    "firebase_url": "https://finaltaskmilab.firebaseio.com",
+    "project_id": "finaltaskmilab",
+    "storage_bucket": "finaltaskmilab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806849435804:android:a7b42ae3ae106b47",
+        "android_client_info": {
+          "package_name": "com.example.afikshani.assests_informer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806849435804-s7rtj19l0u1oibhe4ca062mlsohp9jan.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbK8GyA_Gzjbj9GC8hizjY6v0jW0EvTcw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

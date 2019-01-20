@@ -15,7 +15,7 @@ public class MySocketWrapper{
     private Socket mSocket;
     {
         try {
-            mSocket = IO.socket("http://localhost:8081");
+            mSocket = IO.socket("http://10.0.2.2:8080");
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
