@@ -18,7 +18,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
     private static final String TAG = "MyFirebaseIIDService";
     private static final String SERVER_ADDRESS = "http://10.0.2.2:8080/";
-    private static final String USERNAME = "afik"; // this would be derived from the user data in a real application!
+    private static final String USERNAME = "afik";
 
     private RequestQueue _queue;
 
@@ -49,7 +49,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     private void sendRegistrationToServer(String token) {
         JSONObject requestObject = new JSONObject();
         try {
-            requestObject.put("token", token);
+            requestObject.put("myToken", token);
         }
         catch (JSONException e) {}
 

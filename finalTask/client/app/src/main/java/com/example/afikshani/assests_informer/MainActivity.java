@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         userSocket.on("stock info", onStockInfoPush);
         userSocket.connect();
 
+
         // Setting up the stocks spinner
         stocks_spinner = findViewById(R.id.stocks_spinner);
         ArrayAdapter<CharSequence> stock_adapter = ArrayAdapter.createFromResource(this, R.array.stocks_list, android.R.layout.simple_spinner_item);
@@ -76,6 +77,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        userSocket.off("stock info", onStockInfoPush);
+        userSocket.disconnect();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userSocket.on("stock info", onStockInfoPush);
+        userSocket.connect();
+    }
+
 
     // Create an emitter listener for stock information
     private Emitter.Listener onStockInfoPush = new Emitter.Listener() {
